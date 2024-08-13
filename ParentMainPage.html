@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome</title>
+  <link rel="icon" href="./roll-call.png" type="image/icon type">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+  <style>
+   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+*,
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom right, #1a4e64, #2c7873, #4e8975);
+}
+
+.container {
+  width: 90vw;
+  height: 80vh;
+  display: grid;
+  grid-template-areas:
+    'attendanceAnalysis attendanceAnalysis analysis1'
+    'attendanceAnalysis attendanceAnalysis analysis'
+    'sessional final studentInfo';
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: 20px;
+  padding: 40px 20px 20px;
+  box-shadow: 0 0 17px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  background: white;
+  overflow: hidden;
+  position: relative;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  position: relative;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.box:nth-child(1) {
+  grid-area: attendanceAnalysis;
+  background: #4CAF50; /* Light Green */
+  transition: none;
+}
+
+.box:hover {
+  transform: scale(1.05);
+}
+
+.box-inner {
+  width: 80%;
+  height: 80%;
+  background: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: 600;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.box:nth-child(2) {
+  grid-area: analysis1;
+  background: #2196F3; /* Blue */
+}
+
+.box:nth-child(3) {
+  grid-area: analysis;
+  background: #FF5722; /* Orange */
+}
+
+.box:nth-child(4) {
+  grid-area: sessional;
+  background: #FFEB3B; /* Yellow */
+}
+
+.box:nth-child(5) {
+  grid-area: final;
+  background: #3F51B5; /* Indigo */
+}
+
+.box:nth-child(6) {
+  grid-area: studentInfo;
+  background: #2E7D32; /* Deep Green */
+}
+
+.marquee {
+  width: calc(100% - 40px);
+  height: 20px;
+  margin: 10px;
+  text-align: center;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.scrolling-text {
+  white-space: nowrap;
+  animation: marquee-scroll 20s linear infinite;
+}
+
+.logout-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background-color: #f44336;
+  color: white;
+  padding: 7px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f;
+}
+    @keyframes marquee-scroll {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="./ParentLogin.html" class="logout-button">Logout</a>
+  <div class="container">
+    <div class="box">
+      <div class="box-inner"><h3>Attendance Analysis</h3><canvas id="attendanceChart" style="width: 50%; height: 50%;"></canvas></div>
+    </div>
+    <div class="box">
+      <div class="box-inner"><a href="./AttendanceDetail.php" target="_blank" rel="noreferrer noopener" style="text-decoration:none; color:inherit;">Attendance Detail</a></div>
+    </div>
+    <div class="box">
+      <div class="box-inner"><a href="./TimeTable.php" target="_blank" rel="noreferrer noopener" style="text-decoration:none; color:inherit;">Time Table</a></div>
+    </div>
+    <div class="box">
+      <div class="box-inner"><a href="./SessionalMarks.php" target="_blank" rel="noreferrer noopener" style="text-decoration:none; color:inherit;">Sessional Marks</a></div>
+    </div>
+    <div class="box">
+      <div class="box-inner"><a href="./FinalMarks.php" target="_blank" rel="noreferrer noopener" style="text-decoration:none; color:inherit;">Final Marks</a></div>
+    </div>
+    <div class="box">
+      <div class="box-inner"><a href="./StudentInfo.php" target="_blank" rel="noreferrer noopener" style="text-decoration:none; color:inherit;">Student Information</a></div>
+    </div>
+    <div class="marquee">
+      <div class="scrolling-text">*Student Attendance displayed is only the information for the benefit of students and parents. Final Attendance will be based upon the concerned faculty Register.*</div>
+    </div>
+  </div>
+  <script>
+     document.addEventListener("DOMContentLoaded", () => {
+      fetch('./AttendanceDetail.php')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+          }
+          return response.text();
+        })
+        .then(html => {
+          console.log('Fetched HTML:', html);
+
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          const table = doc.querySelector('table');
+          if (!table) {
+            console.error("No table found in the fetched HTML");
+            return;
+          }
+
+          const subjects = [];
+          const attendancePercentages = [];
+
+          for (let i = 1; i < table.rows.length; i++) {
+            const row = table.rows[i];
+            if (row.cells.length >= 6) {
+              // Map full subject names to their abbreviations
+              const subjectMap = {
+                'Business Economics and Financial Analysis': 'BEFA',
+                'Constitution of India': 'COI',
+                'Database Management Systems': 'DBMS',
+                'Database Management Systems Lab': 'DBMS Lab',
+                'Discrete Mathematics': 'DM',
+                'Node JS Lab': 'Node JS Lab',
+                'Operating Systems': 'OS',
+                'Operating Systems Lab': 'OS Lab',
+                'RT Project': 'RTP',
+                'Software Engineering': 'SE',
+                'Training & Placements': 'T&P'
+              };
+              const fullSubjectName = row.cells[1].textContent.trim();
+              const abbreviatedName = subjectMap[fullSubjectName] || fullSubjectName; // Use abbreviation if available
+              subjects.push(abbreviatedName);
+              attendancePercentages.push(parseFloat(row.cells[5].textContent.trim()));
+            }
+          }
+
+          console.log('Subjects:', subjects);
+          console.log('Attendance Percentages:', attendancePercentages);
+
+          const ctx = document.getElementById('attendanceChart').getContext('2d');
+          new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: subjects,
+              datasets: [{
+                label: 'Attendance Percentage',
+                data: attendancePercentages,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                datalabels: {
+                  anchor: 'end',
+                  align: 'start',
+                formatter: (value, ctx) => {
+                  return ctx.chart.data.labels[ctx.dataIndex];
+                },
+                color: 'black',
+                font: {
+                  weight: 'bold',
+                  size: 10
+                },
+                rotation: 90 // Rotate the text to make it vertical
+              }
+            }]
+          },
+          options: {
+            scales: {
+              x: {
+                display: false // Hide x-axis labels
+              },
+              y: {
+                beginAtZero: true,
+                max: 100,
+                ticks: {
+                  callback: function (value) {
+                    return value + '%';
+                  }
+                }
+              }
+            },
+            plugins: {
+              title: {
+                display: true,
+                text: 'Subject-wise Attendance'
+              },
+              datalabels: {
+                display: true,
+                color: 'black',
+                align: 'end',
+                anchor: 'end',
+                rotation: -90, // Rotate the text to make it vertical
+                font: {
+                  weight: 'bold',
+                  size: 10
+                }
+              }
+            }
+          },
+          plugins: [ChartDataLabels] // Enable data labels plugin
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching attendance data:', error);
+      });
+  });
+  </script>
+</body>
+</html>

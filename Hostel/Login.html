@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #DCDCDC;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 80vw;
+            height: 70vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 17px 10px rgb(0 0 0 / 30%);
+            border-radius: 20px;
+            background: white;
+            overflow: hidden;
+        }
+
+        .left-section {
+            flex-basis: 40%;
+            text-align: center;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hostel-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .right-section {
+            flex-basis: 30%;
+            background-color: #00008B;
+            padding: 40px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-form {
+            text-align: center;
+            color:white; /* White text color */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .yellow-button {
+            background-color: #f1c40f; /* Yellow button color */
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .yellow-button:hover {
+            background-color: #e0b107;
+        }
+
+        a {
+            color: #fff; /* White link color */
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #ddd;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .left-section,
+            .right-section {
+                flex-basis: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <h1>Welcome Back</h1>
+            <p>Please enter your credentials to access your account.</p>
+            <div class="hostel-image">
+                <img src="./Login.png" alt="Hostel Image">
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="login-form">
+                <h2>Login</h2>
+                <form action="login.php" method="post">
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+                    <button class="yellow-button" type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

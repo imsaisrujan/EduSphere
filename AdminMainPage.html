@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome</title>
+  <link rel="icon" href="./roll-call.png" type="image/icon type">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    *,
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom right, #1a4e64, #2c7873, #4e8975);
+    }
+
+    .container {
+      width: 90vw;
+      height: 80vh;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      grid-gap: 20px;
+      padding: 40px 20px 20px;
+      box-shadow: 0 0 17px 10px rgb(0 0 0 / 30%);
+      border-radius: 20px;
+      background: white;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: #FFC107; /* Yellow */
+      position: relative;
+      transition: transform 0.3s ease-in-out;
+      cursor: pointer;
+      height: 100%;
+    }
+
+    .box:hover {
+      transform: scale(1.05);
+    }
+
+    .box-inner {
+      width: 80%;
+      height: 80%;
+      background: white;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-weight: 600;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .box-inner h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .box-inner p {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .box:nth-child(1) {
+      background: #FFC107; /* Yellow */
+    }
+
+    .box:nth-child(2) {
+      background: #2196F3; /* Blue */
+    }
+
+    .box:nth-child(3) {
+      background: #4CAF50; /* Green */
+    }
+
+    .box:nth-child(4) {
+      background: #FF5722; /* Orange */
+    }
+
+    .box:nth-child(5) {
+      background: #9C27B0; /* Purple */
+    }
+
+    .box:nth-child(6) {
+      background: #E91E63; /* Pink */
+    }
+
+    .box:nth-child(7) {
+      background: #FF9800; /* Orange */
+    }
+
+    .box:nth-child(8) {
+      background: #03A9F4; /* Light Blue */
+    }
+
+    .box:nth-child(9) {
+      background: #FF5252; /* Red */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="box">
+      <div class="box-inner">
+        <h3>Add Student</h3>
+      </div>
+    </div>
+    <div class="box">
+      <div class="box-inner">
+        <h3>Manage Student</h3>
+      </div>
+    </div>
+    <div class="box">
+      <div class="box-inner">
+        <h3>Edit/Enter Final Marks</h3>
+      </div>
+    </div>
+    <div class="box">
+      <div class="box-inner">
+        <h3>Add Teacher</h3>
+      </div>
+    </div>
+    <div class="box">
+      <div class="box-inner">
+        <h3>Manage Teacher</h3>
+      </div>
+    </div>
+    <div class="box">
+      <div class="box-inner">
+        <h3>View Final Marks</h3>
+      </div>
+    </div>
+    <div class="box">
+      <div class="box-inner">
+        <h3>Assign Mentees</h3>
+      </div>
+    </div>
+    <div class="box">
+      <div class="box-inner">
+        <h3>View/Drop Mentees</h3>
+      </div>
+    </div>
+    <div class="box">
+      <div class="box-inner">
+        <h3>Edit Attendance</h3>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
