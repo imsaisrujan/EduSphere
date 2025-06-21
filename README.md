@@ -79,6 +79,7 @@ Start your web server and navigate to Login.html in your web browser to access t
 ## 👨‍💻 Author
 
 **Sai Srujan**  
+**Oshmika**
 
 ---
 
